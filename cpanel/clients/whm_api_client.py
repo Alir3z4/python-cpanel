@@ -82,7 +82,7 @@ class WHMAPIClient(object):
                 params[k] = 1 if v else 0
 
         endpoint = inspect.getouterframes(inspect.currentframe(), 2)[1][3]
-        connection = HTTPSConnection(self.get_hostname())
+        connection = HTTPSConnection(self.get_hostname(), self.get_port())
         connection.request(
             method='GET',
             url='/json-api/{}?{}'.format(endpoint, urllib.urlencode(params)),
