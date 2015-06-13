@@ -60,7 +60,7 @@ class WHMAPIClient(object):
         """
         return self.auth_header
 
-    def query(self, query):
+    def _query(self, query):
         """
         Queries specified WHM Server's JSON API.
 
