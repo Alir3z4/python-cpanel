@@ -94,6 +94,23 @@ class WHMAPIClient(object):
 
         return data[data.keys()[1]]
 
+    def accountsummary(self, user, domain):
+        """
+        Account Summary
+        Retrieves a summary of a user's account.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+accountsummary
+
+        :param user: The account's username.
+        :type user: str
+        :param domain: The main domain for an account on the server.
+        :type domain: str
+
+        :returns: A dictionary of account data
+        :rtype: dict
+        """
+        return self._query({'user': user, 'domain': domain})
+
     def accesshash(self, user, generate):
         """
         Access Hash
