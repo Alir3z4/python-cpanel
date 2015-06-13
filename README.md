@@ -1,2 +1,2 @@
-# python-cpanel
+# Python cPanel
 Python cPanel - Eating cPanel with Python 
