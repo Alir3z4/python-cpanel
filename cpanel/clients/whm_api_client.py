@@ -89,10 +89,10 @@ class WHMAPIClient(object):
             headers=self.get_auth_header()
         )
         response = connection.getresponse()
-        data = response.read()
+        data = json.loads(response.read())
         connection.close()
 
-        return json.loads(data)
+        return data[data.keys()[1]]
 
     def accesshash(self, user, generate):
         """
@@ -180,4 +180,3 @@ class WHMAPIClient(object):
         :rtype: dict
         """
         return self._query({'user': user, 'bwlimit': bwlimit})
-
