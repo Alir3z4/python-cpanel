@@ -85,6 +85,21 @@ class WHMAPIClient(object):
 
         return json.loads(data)
 
+    def abort_transfer_session(self, transfer_session_id):
+        """
+        Abort Transfer Session
+        Aborts an active transfer session.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+abort_transfer_session
+
+        :param transfer_session_id: The transfer session's ID.
+        :type: str
+
+        :returns: Only metadata.
+        :rtype: dict
+        """
+        return self._query({'transfer_session_id': transfer_session_id})
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
