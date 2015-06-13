@@ -1,9 +1,8 @@
 from base64 import b64encode
-from http.client import HTTPSConnection
 import inspect
 import json
 
-from cpanel.compat import urllib
+from cpanel.compat import urllib, HTTPSConnection
 
 
 class WHMAPIClient(object):
