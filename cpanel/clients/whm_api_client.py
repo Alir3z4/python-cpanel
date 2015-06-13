@@ -72,6 +72,10 @@ class WHMAPIClient(object):
 
         :rtype: dict
         """
+        for k, v in params.items():
+            if isinstance(v, bool):
+                params[k] = 1 if v else 0
+
         endpoint = inspect.getouterframes(inspect.currentframe(), 2)[1][3]
         connection = HTTPSConnection(self.get_hostname())
         connection.request(
