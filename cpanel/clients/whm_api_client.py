@@ -120,3 +120,22 @@ class WHMAPIClient(object):
             'pass': password,
             'db_pass_update': db_pass_update
         })
+
+    def limitbw(self, user, bwlimit='unlimited'):
+        """
+        Set Cpanel Account Bandwidth Limit
+        Modifies the bandwidth usage (transfer) limit for a specific account.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+limitbw
+
+        :param user: The account's username.
+        :type user: str
+
+        :param bwlimit: The account's new bandwidth quota. This parameter
+        defaults to unlimited.
+        :type bwlimit: str
+
+        :rtype: dict
+        """
+        return self._query({'user': user, 'bwlimit': bwlimit})
+
