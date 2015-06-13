@@ -102,7 +102,7 @@ class WHMAPIClient(object):
             'domain': domain
         })
 
-    def passwd(self, user, password, db_pass_update):
+    def passwd(self, user, password, db_pass_update=True):
         """
         Set Cpanel Account Password
         Changes the password of a domain owner (cPanel) or reseller (WHM) account.
