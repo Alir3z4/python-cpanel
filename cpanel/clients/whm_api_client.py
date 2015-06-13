@@ -144,6 +144,25 @@ class WHMAPIClient(object):
         """
         return self._query({'user': user, 'domain': domain})
 
+    def acctcounts(self, user):
+        """
+        Account Counts
+        Lists a reseller's total accounts, suspended accounts, and account
+        creation limit.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+acctcounts
+
+        :param user: A reseller's username, to query that reseller.
+        If you do not specify a value, the function lists information
+        for the authenticated account.
+        :type user: str
+
+        :returns: Information for an account. Contains the account,
+        suspended, active, and limit parameters.
+        :rtype: dict
+        """
+        return self._query({'user': user})
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
