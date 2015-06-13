@@ -89,6 +89,24 @@ class WHMAPIClient(object):
 
         return json.loads(data)
 
+    def accesshash(self, user, generate):
+        """
+        Access Hash
+        Regenerates or retrieves a user's access hash.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+accesshash
+
+        :param user: The user's name.
+        :type user: str
+
+        :param generate: Whether to regenerate the access hash.
+        :type generate: bool
+
+        :returns: The user's access hash.
+        :rtype: str
+        """
+        return self._query({'user': user, 'generate': generate})
+
     def abort_transfer_session(self, transfer_session_id):
         """
         Abort Transfer Session
