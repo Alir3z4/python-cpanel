@@ -1,4 +1,4 @@
-from setuptools import find_packages, setup
+from setuptools import setup
 
 
 setup(
@@ -10,7 +10,6 @@ setup(
     author='Alireza Savand',
     author_email='alireza.savand@gmail.com',
     description='Python cPanel - Eating cPanel with Python',
-    packages=find_packages(exclude=['tests*']),
     platforms='OS Independent',
     long_description=open('README.rst').read(),
 )
