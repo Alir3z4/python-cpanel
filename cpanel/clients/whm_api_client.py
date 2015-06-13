@@ -32,6 +32,12 @@ class WHMAPIClient(object):
         """
         return self.hostname
 
+    def get_port(self):
+        """
+        :rtype: int
+        """
+        return self.port
+
     def get_username(self):
         """
         :rtype: str
