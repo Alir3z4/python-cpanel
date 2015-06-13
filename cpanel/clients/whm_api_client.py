@@ -94,22 +94,20 @@ class WHMAPIClient(object):
 
         return data[data.keys()[1]]
 
-    def accountsummary(self, user, domain):
+    def abort_transfer_session(self, transfer_session_id):
         """
-        Account Summary
-        Retrieves a summary of a user's account.
+        Abort Transfer Session
+        Aborts an active transfer session.
 
-        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+accountsummary
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+abort_transfer_session
 
-        :param user: The account's username.
-        :type user: str
-        :param domain: The main domain for an account on the server.
-        :type domain: str
+        :param transfer_session_id: The transfer session's ID.
+        :type: str
 
-        :returns: A dictionary of account data
+        :returns: Only metadata.
         :rtype: dict
         """
-        return self._query({'user': user, 'domain': domain})
+        return self._query({'transfer_session_id': transfer_session_id})
 
     def accesshash(self, user, generate):
         """
@@ -129,20 +127,22 @@ class WHMAPIClient(object):
         """
         return self._query({'user': user, 'generate': generate})
 
-    def abort_transfer_session(self, transfer_session_id):
+    def accountsummary(self, user, domain):
         """
-        Abort Transfer Session
-        Aborts an active transfer session.
+        Account Summary
+        Retrieves a summary of a user's account.
 
-        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+abort_transfer_session
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+accountsummary
 
-        :param transfer_session_id: The transfer session's ID.
-        :type: str
+        :param user: The account's username.
+        :type user: str
+        :param domain: The main domain for an account on the server.
+        :type domain: str
 
-        :returns: Only metadata.
+        :returns: A dictionary of account data
         :rtype: dict
         """
-        return self._query({'transfer_session_id': transfer_session_id})
+        return self._query({'user': user, 'domain': domain})
 
     def createacct(self, username, domain):
         """
