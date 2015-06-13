@@ -1,0 +1,7 @@
+[run]
+cover_pylib=False
+source=./server
+
+[report]
+exclude_lines =
+def __repr_

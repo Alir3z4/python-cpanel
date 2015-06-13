@@ -1,0 +1,16 @@
+language: python
+python:
+    - "2.7"
+install:
+    - travis_retry pip install -r requirements_testing.txt
+    - travis_retry pip install coveralls
+script:
+    - PYTHONPATH=$PYTHONPATH:. coverage run --source server --rcfile=.coveragerc -m unittest discover tests
+    - coverage combine
+    - coverage report
+after_success:
+    coveralls --rcfile=.coveragerc
+cache:
+    - apt
+    - directories:
+        - $HOME/.cache/pip
