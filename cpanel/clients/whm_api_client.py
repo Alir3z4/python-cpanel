@@ -1,6 +1,9 @@
 from base64 import b64encode
 from http.client import HTTPSConnection
+import inspect
 import json
+
+from cpanel.compat import urllib
 
 
 class WHMAPIClient(object):
@@ -60,19 +63,20 @@ class WHMAPIClient(object):
         """
         return self.auth_header
 
-    def _query(self, query):
+    def _query(self, params):
         """
         Queries specified WHM Server's JSON API.
 
-        :param query: HTTP GET formatted query string.
-        :type query: str
+        :param params: HTTP GET params..
+        :type params: dict
 
         :rtype: dict
         """
+        endpoint = inspect.getouterframes(inspect.currentframe(), 2)[1][3]
         connection = HTTPSConnection(self.get_hostname())
         connection.request(
             method='GET',
-            url='/json-api/' + query,
+            url='/json-api/{}?{}'.format(endpoint, urllib.urlencode(params)),
             headers=self.get_auth_header()
         )
         response = connection.getresponse()
