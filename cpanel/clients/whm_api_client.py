@@ -84,3 +84,20 @@ class WHMAPIClient(object):
         connection.close()
 
         return json.loads(data)
+
+    def createacct(self, username, domain):
+        """
+        Create Cpanel Account
+        Creates a hosting account and sets up its associated domain information.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+createacct
+
+        :type username: str
+        :type domain: str
+
+        :rtype: dict
+        """
+        return self._query({
+            'username': username,
+            'domain': domain
+        })
