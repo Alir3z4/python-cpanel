@@ -56,9 +56,9 @@ class WHMAPIClient(object):
         :type password: str
         """
         self.auth_header = {
-            'Authorization:' 'Basic ' + b64encode(
+            'Authorization': 'Basic ' + b64encode(
                 '{}:{}'.format(self.get_username(),
-                               self.get_password()).decode('ascii')
+                               self.get_password())
             )
         }
 
