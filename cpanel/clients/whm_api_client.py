@@ -508,6 +508,17 @@ class WHMAPIClient(object):
         """
         return self._query_get({'transfer_session_id': transfer_session_id})
 
+    def applist(self):
+        """
+        App List
+
+        Lists available WHM API 1 functions.
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+applist
+
+        :rtype: dict
+        """
+        return self._query_get({})
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
