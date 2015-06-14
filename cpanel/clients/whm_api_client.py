@@ -255,6 +255,31 @@ class WHMAPIClient(object):
             'trueowner': trueowner
         })
 
+    def addips(self, ips, netmask, excludes):
+        """
+        Add IPs
+        Adds an IP address or addresses to the server.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+addips
+
+        :param ips: The IPv4 address or addresses. (A valid IPv4 address or
+        address range in Class C CIDR format.)
+        :type ips: list
+        :param netmask: The IPv4 address' netmask. (A valid IPv4 netmask
+        address.)
+        :type netmask
+        :param excludes: An IPv4 address or addresses to exclude.
+        :type excludes: list
+
+        :returns: Output of messages
+        :rtype: dict
+        """
+        return self._query_post({
+            'ips': ','.join(ips),
+            'netmask': netmask,
+            'excludes': ','.join(excludes)
+        })
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
