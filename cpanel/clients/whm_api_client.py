@@ -68,24 +68,32 @@ class WHMAPIClient(object):
         """
         return self.auth_header
 
-    def _query(self, params):
+    def _query(self, request_type, endpoint, data):
         """
         Queries specified WHM Server's JSON API.
 
-        :param params: HTTP GET params..
-        :type params: dict
+        :param: request_type: The HTTP request type, it can be ``GET``
+        or ``POST``
+        :type request_type: str
+        :param endpoint: API endpoint.
+        :type endpoint: str
+        :param data: HTTP GET params..
+        :type data: dict
 
         :rtype: dict
         """
-        for k, v in params.items():
+        for k, v in data.items():
             if isinstance(v, bool):
-                params[k] = 1 if v else 0
+                data[k] = 1 if v else 0
 
-        endpoint = inspect.getouterframes(inspect.currentframe(), 2)[1][3]
+        url = '/json-api/{}'.format(endpoint)
+        if request_type == self.REQUEST_TYPE_GET:
+            url = '{}?{}'.format(url, urllib.urlencode(data))
+
         connection = HTTPSConnection(self.get_hostname(), self.get_port())
         connection.request(
-            method='GET',
-            url='/json-api/{}?{}'.format(endpoint, urllib.urlencode(params)),
+            method=request_type,
+            url=url,
             headers=self.get_auth_header()
         )
         response = connection.getresponse()
@@ -93,6 +101,20 @@ class WHMAPIClient(object):
         connection.close()
 
         return data[data.keys()[1]]
+
+    def _query_get(self, params):
+        """
+        :type payload: dict
+        """
+        endpoint = inspect.getouterframes(inspect.currentframe(), 2)[1][3]
+        return self._query(self.REQUEST_TYPE_GET, endpoint, params)
+
+    def _query_post(self, payload):
+        """
+        :type payload: dict
+        """
+        endpoint = inspect.getouterframes(inspect.currentframe(), 2)[1][3]
+        return self._query(self.REQUEST_TYPE_POST, endpoint, payload)
 
     def abort_transfer_session(self, transfer_session_id):
         """
