@@ -190,9 +190,22 @@ class WHMAPIClient(object):
 
     def add_configclusterserver(self, name, user, key):
         """
+        Add Config Cluster Server
+        Adds a server to a configuration cluster.
 
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+add_configclusterserver
+
+        :param name: The remote configuration cluster server's name.
+        :type name: str
+        :param user: The username for the server's root-level account.
+        :type user: str
+        :param key: A truncated version of the server's remote access key.
+        :type key:str
+
+        :returns: metadata
+        :rtype: dict
         """
-        pass
+        self._query_post({'name': name, 'user': user, 'key': key})
 
     def createacct(self, username, domain):
         """
