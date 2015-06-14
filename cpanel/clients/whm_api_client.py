@@ -11,6 +11,9 @@ class WHMAPIClient(object):
     username = None
     password = None
     auth_header = None
+    REQUEST_TYPE_GET = 'GET'
+    REQUEST_TYPE_POST = 'POST'
+    ALLOWED_REQUEST_TYPES = (REQUEST_TYPE_GET, REQUEST_TYPE_POST, )
 
     def __init__(self, hostname, username, password, port=2087):
         """
@@ -129,7 +132,7 @@ class WHMAPIClient(object):
         :returns: Only metadata.
         :rtype: dict
         """
-        return self._query({'transfer_session_id': transfer_session_id})
+        return self._query_get({'transfer_session_id': transfer_session_id})
 
     def accesshash(self, user, generate):
         """
@@ -147,7 +150,7 @@ class WHMAPIClient(object):
         :returns: The user's access hash.
         :rtype: str
         """
-        return self._query({'user': user, 'generate': generate})
+        return self._query_get({'user': user, 'generate': generate})
 
     def accountsummary(self, user, domain):
         """
@@ -164,7 +167,7 @@ class WHMAPIClient(object):
         :returns: A dictionary of account data
         :rtype: dict
         """
-        return self._query({'user': user, 'domain': domain})
+        return self._query_get({'user': user, 'domain': domain})
 
     def acctcounts(self, user):
         """
@@ -183,7 +186,13 @@ class WHMAPIClient(object):
         suspended, active, and limit parameters.
         :rtype: dict
         """
-        return self._query({'user': user})
+        return self._query_get({'user': user})
+
+    def add_configclusterserver(self, name, user, key):
+        """
+
+        """
+        pass
 
     def createacct(self, username, domain):
         """
@@ -197,7 +206,7 @@ class WHMAPIClient(object):
 
         :rtype: dict
         """
-        return self._query({
+        return self._query_get({
             'username': username,
             'domain': domain
         })
@@ -215,7 +224,7 @@ class WHMAPIClient(object):
 
         :rtype: dict
         """
-        return self._query({
+        return self._query_get({
             'user': user,
             'pass': password,
             'db_pass_update': db_pass_update
@@ -237,4 +246,4 @@ class WHMAPIClient(object):
 
         :rtype: dict
         """
-        return self._query({'user': user, 'bwlimit': bwlimit})
+        return self._query_get({'user': user, 'bwlimit': bwlimit})
