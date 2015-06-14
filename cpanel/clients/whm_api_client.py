@@ -280,6 +280,153 @@ class WHMAPIClient(object):
             'excludes': ','.join(excludes)
         })
 
+    def addpkg(self, name, featurelist='default', quota='unlimited', ip='n',
+               cgi=True, frontpage=True, cpmod=None, language='EN',
+               maxftp='unlimited', maxsql='unlimited', maxpop='unlimited',
+               maxlists='unlimited', maxsub='unlimited', maxpark='unlimited',
+               maxaddon='unlimited', hasshell=False, bwlimit='unlimited',
+               MAX_EMAIL_PER_HOUR='unlimited',
+               MAX_DEFER_FAIL_PERCENTAGE='unlimited', digestauth=False,
+               _PACKAGE_EXTENSIONS=list):
+        """
+        Add PKG
+        Creates a hosting plan (package).
+
+        :param name: The new hosting plan's name. (A valid hosting plan name.)
+        :param featurelist: The hosting plan's feature list. If you do not
+        use this parameter, the function assigns the default feature list
+        to the account. (A valid feature list name on the server.)
+        :type featurelist: str
+        :param quota: The hosting plan's disk space quota. This parameter
+        defaults to 0 (unlimited). (A positive integer between one and
+        999,999 that represents the maximum disk space that the account
+        may use, in Megabytes (MB).0 — The hosting plan's disk space
+        is unlimited.)
+        :type quota: int
+        :param ip: Whether the account has a dedicated IP address. This
+        parameter defaults to n. (
+            * y — The account has a dedicated IP address.
+            * n — The account does not have a dedicated IP addr
+        )
+        :type ip: str
+        :param cgi: Whether CGI access is enabled for the account. This
+        parameter defaults to ``True``.
+        :type cgi: bool
+        :param frontpage: Whether Microsoft® FrontPage Extensions are enabled for the
+        account.
+        :type frontpage: bool
+        :param cpmod: The hosting plan's cPanel theme. This parameter
+        defaults to the server's default cPanel theme. (
+            * x3
+            * paper_lantern
+        )
+        :type cpmod: str
+        :param language: The hosting plan's default locale. This value
+        defaults to the server's default locale. (A two-letter ISO-3166 code.)
+        :param maxftp: The hosting plan's maximum number of FTP accounts.
+        This parameter defaults to ``unlimited``. (
+            * A positive integer between one and 999,999.
+            * 0, unlimited, or null — The account has unlimited FTP accounts.
+        )
+        :type maxftp: str
+        :param maxsql: The hosting plan's maximum number of each available
+        type of SQL database. For example, if you set this value to 5 and
+        the system administrator allows MySQL® and PostgreSQL databases,
+        you can create up to 5 MySQL databases and up to 5 PostgreSQL
+        databases. parameter defaults to ``unlimited``. (
+            * A positive integer between one and 999,999.
+            * 0, unlimited, or null — The account has unlimited databases.
+        )
+        :type maxsql: str
+        :param maxpop: The hosting plan's maximum number of email accounts.
+        This parameter defaults to ``unlimited.`` (
+            * A positive integer between one and 999,999.
+            * 0, unlimited, or null — The account has unlimited email accounts.
+        )
+        :param maxlists: The hosting plan's maximum number of mailing lists.
+        This parameter defaults to ``unlimited``. (
+            * A positive integer between one and 999,999.
+            * 0, unlimited, or null — The account has unlimited mailing lists.
+        )
+        :type maxlists: str
+        :param maxsub: The hosting plan's maximum number of subdomains.
+        This parameter defaults to unlimited. (
+            * A positive integer between one and 999,999.
+            * 0, unlimited, or null — The account has unlimited subdomains.
+        )
+        :type maxsub: str
+        :param maxpark: The hosting plan's maximum number of parked domains.
+        This parameter defaults to ``unlimited``. (
+            * A positive integer between one and 999,999.
+            * 0, unlimited, or null — The account has unlimited parked domains.
+        )
+        :type maxpark: str
+        :param maxaddon: The hosting plan's maximum number of addon domains.
+        This parameter defaults to ``unlimited``. (
+            * A positive integer between one and 999,999.
+            * 0, unlimited, or null — The account has unlimited addon domains.
+        )
+        :type maxaddon: str
+        :param hasshell: Whether the account has shell access.
+        This parameter defaults to `False`.
+        :type hasshell: bool
+        :param bwlimit: The hosting plan's maximum bandwidth use.
+        This parameter defaults to ``unlimited``. (
+            * A positive integer between one and 999,999 that represents the
+            maximum bandwidth use, in Megabytes (MB).
+            * 0, unlimited, or null — The account has unlimited bandwidth.
+        )
+        :type bwlimit: str
+        :param MAX_EMAIL_PER_HOUR: The maximum number of emails that the
+        account can send in one hour. This parameter defaults to ``unlimited``.(
+            * A positive integer.
+            * 0 or unlimited — The account can send an unlimited number of emails.
+        )
+        :type MAX_EMAIL_PER_HOUR: str
+        :param MAX_DEFER_FAIL_PERCENTAGE: The percentage of failed or
+        deferred email messages that the account can send per hour before
+        outgoing mail is rate-limited. (
+            * A positive integer.
+            * 0 or unlimited — The account can send an unlimited number
+            of failed or deferred messages.
+        )
+        :type MAX_DEFER_FAIL_PERCENTAGE: int
+        :param digestauth: Whether to enable Digest Authentication for
+        accounts on the hosting plan. This parameter defaults to ``False``.
+        :type digestauth: bool
+        :param _PACKAGE_EXTENSIONS: The hosting plan's package extensions.
+        If you do not provide a value, the hosting plan will not
+        include package extensions. A list of one or more
+        package extensions on the server.
+        :type _PACKAGE_EXTENSIONS: list
+
+        :returns: The new hosting plan's name.
+        :rtype: dict
+        """
+        return self._query_post({
+            'name': name,
+            'featurelist': featurelist,
+            'quota': quota,
+            'ip': ip,
+            'cgi': cgi,
+            'frontpage': frontpage,
+            'cpmod': cpmod,
+            'language': language,
+            'maxftp': maxftp,
+            'maxsql': maxsql,
+            'maxpop': maxpop,
+            'maxlists': maxlists,
+            'maxsub': maxsub,
+            'maxpark': maxpark,
+            'maxaddon': maxaddon,
+            'hasshell': hasshell,
+            'bwlimit': bwlimit,
+            'MAX_EMAIL_PER_HOUR': MAX_EMAIL_PER_HOUR,
+            'MAX_DEFER_FAIL_PERCENTAGE': MAX_DEFER_FAIL_PERCENTAGE,
+            'digestauth': digestauth,
+            '_PACKAGE_EXTENSIONS': '_PACKAGE_EXTENSIONS'
+        })
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
