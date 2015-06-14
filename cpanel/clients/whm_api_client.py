@@ -207,6 +207,54 @@ class WHMAPIClient(object):
         """
         self._query_post({'name': name, 'user': user, 'key': key})
 
+    def adddns(self, domain, ip, template, trueowner):
+        """
+        Add DNS
+        Creates a DNS zone. When you call this function, the system uses the
+        domain name and IP address that you supply. WHM's standard zone
+        template determines all other zone information.
+        Generates the DNS zone's MX record, domain PTR, and A records
+        automatically.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+adddns
+
+        :param domain: The new zone's domain. (A valid domain name on the
+        server.)
+        :type domain: str
+        :param ip: The domain's IP address. (A valid IP address.)
+        :type ip: str
+        :param template: The zone file template. If you do not use this
+        parameter, the function uses the standard zone file template. (
+            * standard
+            * simple
+            * standardvirtualftp
+            * The name of a custom zone template file in the
+            /var/cpanel/zonetemplates directory.)
+        :type template: str
+        :param trueowner: The new zone's owner. (A valid cPanel or WHM
+        username.)
+        :type trueowner: str
+
+        :returns: Metadata
+        :rtype: dict
+        """
+        allowed_template = (
+            'standard',
+            'simple',
+            'standardvirtualftp',
+            '/var/cpanel/zonetemplates'
+        )
+        if (template not in allowed_template[0:2]
+            or not template.startswith(allowed_template[-1])):
+            raise ValueError()
+
+        return self._query_post({
+            'domain': domain,
+            'ip': ip,
+            'template': template,
+            'trueowner': trueowner
+        })
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
