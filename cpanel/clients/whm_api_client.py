@@ -494,6 +494,20 @@ class WHMAPIClient(object):
             'ptrdname': ptrdname
         })
 
+    def analyze_transfer_session_remote(self, transfer_session_id):
+        """
+        Analyze Transfer Session Remote
+        Checks the remote server's credentials, which a transfer session uses
+        to connect.
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+analyze_transfer_session_remote
+
+        :param transfer_session_id: The transfer session's ID.
+        :type transfer_session_id: str
+
+        :returns: Only metadata
+        """
+        return self._query_get({'transfer_session_id': transfer_session_id})
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
