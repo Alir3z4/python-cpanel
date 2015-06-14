@@ -429,6 +429,40 @@ class WHMAPIClient(object):
             '_PACKAGE_EXTENSIONS': '_PACKAGE_EXTENSIONS'
         })
 
+    def addzonerecord(self, domain, name, _class, ttl, _type):
+        """
+        Add Zone Record
+        Adds a DNS zone record.
+
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+addzonerecord
+
+        :param domain: The new zone record's domain. (A valid domain name on
+        the server.)
+        :type domain: str
+        :param name: The record's name.(A valid domain name or hostname.)
+        :type name: str
+        :param _class: The record's name. (
+            * IN
+            * Very rarely, another valid DNS record class.
+        )
+        :type _class: str
+        :param ttl: The record's Time To Live (TTL). (A positive integer that
+        represents the TTL, in seconds.)
+        :type ttl: str
+        :param _type: The DNS record type.
+        :type _type: str
+
+        :returns: Only metadata
+        :rtype: dict
+        """
+        return self._query_post({
+            'domain': domain,
+            'name': name
+            'class': _class,
+            'ttl': ttl,
+            'type': _type
+        })
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
