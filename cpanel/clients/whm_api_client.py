@@ -292,6 +292,8 @@ class WHMAPIClient(object):
         Add PKG
         Creates a hosting plan (package).
 
+        https://documentation.cpanel.net/display/SDK/WHM+API+1+Functions+-+addpkg
+
         :param name: The new hosting plan's name. (A valid hosting plan name.)
         :param featurelist: The hosting plan's feature list. If you do not
         use this parameter, the function assigns the default feature list
