@@ -463,6 +463,37 @@ class WHMAPIClient(object):
             'type': _type
         })
 
+    def addzonerecord(self, zone, name, _type, ptrdname):
+        """
+        Add Zone Record (Reverse DNS)
+        Uses PTR records to add reverse DNS functionality.
+        Reverse DNS lookups use PTR records to convert IP
+        addresses into domain names.
+
+        https://documentation.cpanel.net/pages/viewpage.action?pageId=1512956
+
+        :param zone: The new reverse DNS zone's name. (A valid domain name
+        on the server.)
+        :type zone: str
+        :param name: The record's name. (The last octet of the record's
+        IP address.)
+        :type name: str
+        :param _type: The DNS record type. (For reverse DNS records, you must
+        select PTR.)
+        :type _type: str
+        :param ptrdname: A pointer to a canonical name (CNAME). (A valid
+        hostname.)
+
+        :returns: Only metadata
+        :rtype: dict
+        """
+        return self._query_post({
+            'zone': zone,
+            'name': name,
+            '_type': _type,
+            'ptrdname': ptrdname
+        })
+
     def createacct(self, username, domain):
         """
         Create Cpanel Account
