@@ -1,3 +1,4 @@
+# coding=utf-8
 from base64 import b64encode
 import inspect
 import json
@@ -103,7 +104,7 @@ class WHMAPIClient(object):
         data = json.loads(response.read())
         connection.close()
 
-        return data[data.keys()[1]]
+        return data
 
     def _query_get(self, params):
         """
@@ -302,20 +303,20 @@ class WHMAPIClient(object):
         :param quota: The hosting plan's disk space quota. This parameter
         defaults to 0 (unlimited). (A positive integer between one and
         999,999 that represents the maximum disk space that the account
-        may use, in Megabytes (MB).0 — The hosting plan's disk space
+        may use, in Megabytes (MB).0 - The hosting plan's disk space
         is unlimited.)
         :type quota: int
         :param ip: Whether the account has a dedicated IP address. This
         parameter defaults to n. (
-            * y — The account has a dedicated IP address.
-            * n — The account does not have a dedicated IP addr
+            * y - The account has a dedicated IP address.
+            * n - The account does not have a dedicated IP addr
         )
         :type ip: str
         :param cgi: Whether CGI access is enabled for the account. This
         parameter defaults to ``True``.
         :type cgi: bool
-        :param frontpage: Whether Microsoft® FrontPage Extensions are enabled for the
-        account.
+        :param frontpage: Whether Microsoft FrontPage Extensions are enabled
+        for the account.
         :type frontpage: bool
         :param cpmod: The hosting plan's cPanel theme. This parameter
         defaults to the server's default cPanel theme. (
@@ -328,7 +329,7 @@ class WHMAPIClient(object):
         :param maxftp: The hosting plan's maximum number of FTP accounts.
         This parameter defaults to ``unlimited``. (
             * A positive integer between one and 999,999.
-            * 0, unlimited, or null — The account has unlimited FTP accounts.
+            * 0, unlimited, or null - The account has unlimited FTP accounts.
         )
         :type maxftp: str
         :param maxsql: The hosting plan's maximum number of each available
@@ -337,36 +338,36 @@ class WHMAPIClient(object):
         you can create up to 5 MySQL databases and up to 5 PostgreSQL
         databases. parameter defaults to ``unlimited``. (
             * A positive integer between one and 999,999.
-            * 0, unlimited, or null — The account has unlimited databases.
+            * 0, unlimited, or null - The account has unlimited databases.
         )
         :type maxsql: str
         :param maxpop: The hosting plan's maximum number of email accounts.
         This parameter defaults to ``unlimited.`` (
             * A positive integer between one and 999,999.
-            * 0, unlimited, or null — The account has unlimited email accounts.
+            * 0, unlimited, or null - The account has unlimited email accounts.
         )
         :param maxlists: The hosting plan's maximum number of mailing lists.
         This parameter defaults to ``unlimited``. (
             * A positive integer between one and 999,999.
-            * 0, unlimited, or null — The account has unlimited mailing lists.
+            * 0, unlimited, or null - The account has unlimited mailing lists.
         )
         :type maxlists: str
         :param maxsub: The hosting plan's maximum number of subdomains.
         This parameter defaults to unlimited. (
             * A positive integer between one and 999,999.
-            * 0, unlimited, or null — The account has unlimited subdomains.
+            * 0, unlimited, or null - The account has unlimited subdomains.
         )
         :type maxsub: str
         :param maxpark: The hosting plan's maximum number of parked domains.
         This parameter defaults to ``unlimited``. (
             * A positive integer between one and 999,999.
-            * 0, unlimited, or null — The account has unlimited parked domains.
+            * 0, unlimited, or null - The account has unlimited parked domains.
         )
         :type maxpark: str
         :param maxaddon: The hosting plan's maximum number of addon domains.
         This parameter defaults to ``unlimited``. (
             * A positive integer between one and 999,999.
-            * 0, unlimited, or null — The account has unlimited addon domains.
+            * 0, unlimited, or null - The account has unlimited addon domains.
         )
         :type maxaddon: str
         :param hasshell: Whether the account has shell access.
@@ -376,20 +377,20 @@ class WHMAPIClient(object):
         This parameter defaults to ``unlimited``. (
             * A positive integer between one and 999,999 that represents the
             maximum bandwidth use, in Megabytes (MB).
-            * 0, unlimited, or null — The account has unlimited bandwidth.
+            * 0, unlimited, or null - The account has unlimited bandwidth.
         )
         :type bwlimit: str
         :param MAX_EMAIL_PER_HOUR: The maximum number of emails that the
         account can send in one hour. This parameter defaults to ``unlimited``.(
             * A positive integer.
-            * 0 or unlimited — The account can send an unlimited number of emails.
+            * 0 or unlimited - The account can send an unlimited number of emails.
         )
         :type MAX_EMAIL_PER_HOUR: str
         :param MAX_DEFER_FAIL_PERCENTAGE: The percentage of failed or
         deferred email messages that the account can send per hour before
         outgoing mail is rate-limited. (
             * A positive integer.
-            * 0 or unlimited — The account can send an unlimited number
+            * 0 or unlimited - The account can send an unlimited number
             of failed or deferred messages.
         )
         :type MAX_DEFER_FAIL_PERCENTAGE: int
@@ -457,7 +458,7 @@ class WHMAPIClient(object):
         """
         return self._query_post({
             'domain': domain,
-            'name': name
+            'name': name,
             'class': _class,
             'ttl': ttl,
             'type': _type
